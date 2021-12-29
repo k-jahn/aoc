@@ -2,36 +2,36 @@ const { test, input } = require('./25.input');
 
 class Seafloor {
 	constructor(str) {
-		this.m = str.split('\n').map(l => l.split(''));
+		this.m = str.split('\n').map((l) => l.split(''));
 		this.steps = 0;
-		this.locked = false
+		this.locked = false;
 	}
 
 	step() {
 		this.getCandidates();
-		if (!this.candidates['v'].length && !this.candidates['>'].length) {
+		if (!this.candidates.v.length && !this.candidates['>'].length) {
 			this.locked = true;
 			return;
 		}
 		this.moveSnails('>');
 		this.getCandidates();
-		this.moveSnails('v')
+		this.moveSnails('v');
 		this.steps++;
 		console.clear();
-		const squiggly = ['/', '-', '\\', '|'][~~(this.steps/200) % 4]
-		console.log(squiggly, this.steps)
+		const squiggly = ['/', '-', '\\', '|'][~~(this.steps / 200) % 4];
+		console.log(squiggly, this.steps);
 		// console.log(this.toString())
 	}
 
 	getCandidates() {
 		this.candidates = {
-			'v': [],
-			'>': []
-		}
+			v: [],
+			'>': [],
+		};
 		for (let i = 0; i < this.m.length; i++) {
 			for (let j = 0; j < this.m[i].length; j++) {
 				if (this.canSnailMove(i, j)) {
-					this.candidates[this.m[i][j]].push([i, j])
+					this.candidates[this.m[i][j]].push([i, j]);
 				}
 			}
 		}
@@ -40,19 +40,19 @@ class Seafloor {
 	canSnailMove(x, y) {
 		const snail = this.m[x][y];
 		if (snail == 'v') {
-			return this.checkFree(x + 1, y)
-		} else if (snail == '>') {
-			return this.checkFree(x, y + 1)
+			return this.checkFree(x + 1, y);
+		} if (snail == '>') {
+			return this.checkFree(x, y + 1);
 		}
-		return false
+		return false;
 	}
 
 	moveSnails(direction) {
 		this.candidates[direction].forEach(([x, y]) => {
-			this.write(x, y, '.')
+			this.write(x, y, '.');
 			const [tx, ty] = this.wrap(direction == 'v' ? x + 1 : x, direction == '>' ? y + 1 : y);
 			this.write(tx, ty, direction);
-		})
+		});
 	}
 
 	checkFree(x, y) {
@@ -73,13 +73,12 @@ class Seafloor {
 	}
 
 	toString() {
-		return '\n' + this.m.map(l => l.join('')).join('\n') + '\n';
+		return '\n' + this.m.map((l) => l.join('')).join('\n') + '\n';
 	}
 }
 
+const seafloor = new Seafloor(input);
 
-const seafloor = new Seafloor(input)
+while (!seafloor.locked) seafloor.step();
 
-while (!seafloor.locked) seafloor.step()
-
-console.log(seafloor.steps+1);
+console.log(seafloor.steps + 1);

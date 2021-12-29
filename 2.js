@@ -1,44 +1,49 @@
-const input = ['forward 6','forward 9','down 9','down 7','forward 8','down 4','forward 7','forward 3','up 5','down 7','down 3','down 2','down 1','down 2','down 1','forward 5','down 9','up 7','forward 6','forward 3','down 2','forward 2','down 4','down 3','forward 9','up 4','down 7','forward 5','down 4','down 4','forward 8','up 6','forward 4','forward 6','down 8','forward 6','up 9','down 6','down 8','forward 7','down 8','up 1','forward 5','up 8','forward 9','down 7','down 9','up 3','forward 9','forward 7','down 1','down 5','forward 6','up 3','down 2','forward 8','forward 5','forward 9','down 5','down 5','forward 7','forward 9','forward 8','forward 9','up 4','up 8','forward 2','up 6','forward 2','down 8','forward 4','forward 6','down 1','forward 3','down 7','down 8','forward 9','forward 5','down 8','forward 1','forward 8','down 8','up 1','down 9','forward 6','down 1','down 8','up 6','up 8','down 7','forward 8','down 3','forward 2','up 2','forward 1','forward 7','down 5','down 7','forward 5','down 7','forward 5','forward 4','up 8','down 5','forward 8','forward 6','up 4','up 1','down 1','down 8','down 1','up 1','down 4','down 4','up 3','down 6','forward 7','up 8','up 1','forward 7','forward 6','down 9','forward 3','down 9','down 5','forward 5','forward 1','forward 5','down 4','forward 4','up 5','down 8','down 2','forward 2','down 8','up 4','down 3','forward 6','up 7','forward 2','up 5','up 9','forward 6','down 1','down 1','up 4','down 7','up 2','forward 1','down 5','down 4','down 5','forward 4','down 3','up 8','forward 7','down 2','up 6','forward 4','forward 8','forward 8','up 7','down 2','down 7','down 9','forward 8','down 9','down 5','forward 8','forward 6','up 4','up 7','down 7','forward 1','up 2','forward 1','down 6','down 1','forward 9','forward 8','up 4','forward 9','up 7','forward 8','forward 1','down 6','up 3','forward 2','down 6','up 3','up 5','forward 6','up 5','down 9','forward 4','up 5','down 3','forward 5','forward 2','up 6','up 1','up 4','forward 9','down 5','up 2','forward 9','up 5','down 6','up 9','down 6','down 7','forward 6','forward 3','down 2','forward 3','down 1','down 9','down 2','down 2','forward 8','up 9','forward 4','forward 6','forward 5','forward 9','forward 4','up 6','down 8','down 8','down 3','forward 1','forward 7','up 3','forward 2','down 9','up 7','forward 5','down 1','forward 9','up 8','forward 7','forward 1','down 7','forward 8','down 7','down 6','forward 5','forward 7','up 9','up 4','forward 2','down 1','forward 3','down 5','forward 2','forward 2','forward 6','up 1','up 9','down 1','down 7','up 6','down 6','down 7','forward 3','forward 7','forward 9','forward 9','down 6','down 8','forward 9','up 5','forward 5','down 6','down 4','forward 1','up 9','forward 6','up 4','up 7','forward 5','down 7','down 6','forward 2','down 4','forward 2','down 1','forward 8','down 3','down 8','down 7','down 6','forward 3','forward 1','down 8','up 4','down 8','forward 7','down 2','forward 3','forward 2','forward 4','forward 2','forward 8','forward 2','up 1','down 6','down 9','down 3','forward 8','down 3','forward 8','forward 3','forward 5','down 6','forward 6','forward 2','down 7','forward 8','down 1','forward 7','forward 6','up 9','forward 2','up 4','up 6','forward 4','forward 5','forward 6','forward 7','down 4','forward 9','forward 1','down 8','down 5','down 9','up 5','forward 9','forward 6','forward 7','down 5','forward 9','down 4','down 8','forward 9','down 5','down 5','down 6','forward 8','forward 9','down 5','down 7','forward 8','forward 5','forward 9','up 4','down 3','down 3','forward 5','down 7','down 3','up 7','forward 6','up 7','down 9','forward 6','forward 8','up 8','down 9','down 6','up 3','forward 6','up 3','down 4','down 6','forward 5','down 5','forward 1','down 5','forward 2','up 3','up 9','down 9','up 1','down 3','down 4','forward 5','up 4','down 2','forward 1','forward 7','up 9','up 9','down 2','down 8','forward 5','down 4','up 2','forward 9','down 3','up 6','down 3','forward 1','down 7','down 7','down 7','forward 1','forward 6','down 5','up 7','forward 2','up 6','down 5','up 3','down 5','up 1','down 9','up 2','down 7','up 5','down 6','up 1','forward 5','down 2','down 1','up 2','forward 5','forward 8','up 7','up 5','forward 9','forward 9','forward 5','forward 8','down 4','forward 8','down 1','up 3','down 1','down 9','up 5','down 7','down 8','down 4','down 3','forward 6','down 5','down 7','forward 6','down 3','down 1','down 5','forward 4','up 8','down 6','forward 1','forward 1','down 4','down 8','forward 9','forward 3','forward 6','down 5','down 7','down 4','up 1','forward 2','forward 4','forward 8','up 2','up 9','up 3','down 8','forward 4','down 7','forward 7','down 5','up 3','up 6','down 5','forward 2','down 8','up 1','down 4','down 4','forward 1','down 6','down 1','up 2','forward 2','down 8','down 7','forward 5','forward 2','up 4','forward 6','down 4','down 6','down 2','up 5','down 5','forward 7','forward 2','down 2','down 7','forward 1','forward 1','forward 4','down 3','forward 3','up 4','up 6','down 3','forward 4','down 5','down 6','down 1','forward 3','up 3','down 5','down 5','down 5','forward 5','forward 5','forward 2','up 3','down 6','down 6','down 2','down 5','forward 3','forward 9','down 9','forward 6','up 4','down 8','up 7','forward 1','forward 4','forward 9','down 6','up 1','up 1','up 4','up 6','forward 7','down 5','forward 8','forward 7','up 1','up 6','down 7','down 8','down 4','down 8','up 8','down 7','up 1','forward 9','forward 6','forward 2','forward 7','down 9','down 9','down 7','forward 4','forward 8','forward 8','up 3','down 7','down 7','down 3','forward 5','forward 3','down 3','down 6','forward 2','down 6','up 7','forward 2','up 5','down 7','forward 4','down 7','forward 6','up 6','up 6','forward 6','forward 3','up 1','forward 2','forward 6','up 1','down 9','forward 8','forward 6','down 8','down 3','up 5','forward 7','forward 2','up 4','up 3','forward 4','down 3','down 5','down 5','down 2','down 7','up 2','down 2','up 7','down 1','forward 6','forward 5','forward 4','down 6','down 1','down 5','down 6','down 3','down 9','down 2','down 7','forward 7','up 7','down 3','down 3','forward 7','up 5','down 9','forward 9','down 2','up 4','up 9','up 9','down 1','up 6','down 1','forward 7','down 6','forward 9','down 9','down 4','down 1','forward 6','down 2','forward 6','up 8','forward 1','up 1','up 5','down 6','down 8','down 8','forward 5','forward 4','forward 3','up 8','up 9','down 4','forward 4','forward 4','down 9','forward 9','down 7','forward 7','up 4','forward 2','down 8','forward 1','down 7','forward 5','forward 1','down 8','up 1','up 1','down 2','down 4','down 7','down 3','forward 7','down 3','up 3','forward 8','up 6','forward 7','forward 6','down 1','down 8','forward 7','up 1','forward 2','down 6','down 1','forward 4','forward 2','down 9','up 8','down 9','down 2','down 3','down 5','down 3','down 8','down 1','down 1','up 5','forward 5','down 2','down 5','down 5','up 4','up 5','up 6','up 7','down 5','forward 4','up 6','up 3','down 5','forward 9','down 5','down 3','down 8','forward 6','forward 4','forward 4','forward 4','forward 9','forward 3','up 3','forward 7','down 6','down 7','down 9','down 5','up 3','forward 9','forward 7','forward 2','down 4','up 4','down 7','down 9','down 6','down 8','forward 4','forward 9','down 4','forward 9','forward 3','forward 9','down 8','forward 6','down 6','up 8','forward 9','forward 5','forward 6','down 5','up 1','forward 2','up 5','up 8','down 7','down 9','forward 6','forward 7','forward 2','down 8','down 5','forward 5','down 6','forward 2','forward 7','down 6','up 5','down 4','down 7','up 9','up 4','down 1','forward 4','up 6','forward 2','forward 8','forward 9','down 5','forward 1','forward 1','down 6','up 9','forward 7','down 9','forward 4','forward 2','forward 6','forward 6','forward 7','up 6','down 8','up 8','down 7','forward 6','up 2','forward 6','down 1','down 5','down 6','up 8','forward 5','up 5','forward 1','down 9','down 1','up 4','down 2','up 8','up 2','down 3','up 4','down 3','up 5','down 4','down 2','up 9','forward 2','forward 8','down 5','down 3','forward 4','forward 3','forward 3','down 6','down 8','forward 6','down 1','forward 6','down 8','down 7','down 7','forward 6','forward 5','up 8','forward 7','up 6','down 7','forward 7','down 8','down 8','forward 7','up 4','forward 4','forward 1','up 1','down 5','up 6','up 6','up 7','down 1','down 2','up 3','down 3','forward 6','down 7','down 9','down 1','forward 2','forward 6','down 9','up 2','forward 6','up 7','forward 5','down 6','down 5','forward 2','down 9','forward 8','up 7','down 9','down 7','forward 8','forward 7','down 6','down 7','forward 1','down 9','up 6','up 8','down 4','down 2','down 4','down 2','down 5','forward 9','down 3','forward 3','forward 1','down 2','down 4','down 1','up 3','up 7','down 5','down 8','forward 6','up 6','down 2','down 3','forward 3','up 4','up 3','down 6','down 3','forward 4','forward 7','forward 3','up 7','forward 3','down 8','forward 7','down 3','forward 8','forward 2','forward 4','down 5','forward 3','down 8','up 2','forward 5','up 7','forward 2','down 2','down 5','up 1','up 7','down 4','up 9','down 4','forward 3','forward 1','up 9','forward 1','forward 3','forward 1','forward 5','forward 2','forward 6','up 6','down 1','forward 1','forward 6','forward 6','forward 5','down 6','forward 8','down 4','forward 3','forward 4','forward 1','forward 9','down 4','forward 5','down 2','down 3','forward 7','forward 2','forward 1','forward 5','down 9','up 3','up 7','forward 3','forward 2','down 2','up 7','forward 9','up 4','up 2','up 1','down 5','down 4','forward 2','down 6','down 5','down 6','forward 6','down 9','down 1','forward 2','forward 7','forward 4','down 5','down 6','down 2','forward 7','down 3','forward 5'];
-const parsedInput = input.map(e=>e.split(' '))
-    .map(e=>[e[0],+e[1]]);
+const input = require('./2.input');
 
-const nav = course => course
-    .reduce((a,e) => {
-        const [direction, increment] = e;
-        switch (direction){
-            case 'forward':
-                a[0] += increment;
-                break;
-            case 'up':
-                a[1] -= increment;
-                break;
-            case 'down':
-                a[1] += increment;
-                break;
-        }
-        return a;
-    },[0,0])
+const parsedInput = input.map((e) => e.split(' '))
+	.map((e) => [e[0], +e[1]]);
 
-const reduce = a => a[0]*a[1];
+const nav = (course) => course
+	.reduce((a, e) => {
+		let [x, y] = a;
+		const [direction, increment] = e;
+		switch (direction) {
+			case 'forward':
+				x += increment;
+				break;
+			case 'up':
+				y -= increment;
+				break;
+			case 'down':
+				y += increment;
+				break;
+			default:
+		}
+		return [x, y];
+	}, [0, 0]);
 
-console.log('a:', reduce(nav(parsedInput)));
+const reduce = (a) => a[0] * a[1];
 
-const navAim = course => course
-    .reduce((a,e) => {
-        const [direction, increment] = e;
-        switch (direction){
-            case 'forward':
-                a[0] += increment;
-                a[1] += increment * a[2];
-                break;
-            case 'up':
-                a[2] -= increment;
-                break;
-            case 'down':
-                a[2] += increment;
-                break;
-        }
-        return a;
-    },[0,0,0])
+console.log('Part 1:', reduce(nav(parsedInput)));
 
-console.log('b', reduce(navAim(parsedInput)))
+const navAim = (course) => course
+	.reduce((a, e) => {
+		let [x, y, aim] = a;
+		const [direction, increment] = e;
+		switch (direction) {
+			case 'forward':
+				x += increment;
+				y += increment * aim;
+				break;
+			case 'up':
+				aim -= increment;
+				break;
+			case 'down':
+				aim += increment;
+				break;
+			default:
+		}
+		return [x, y, aim];
+	}, [0, 0, 0]);
+
+console.log('b', reduce(navAim(parsedInput)));

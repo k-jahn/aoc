@@ -1,4 +1,4 @@
-module.exports.input= `--- scanner 0 ---
+module.exports.input = `--- scanner 0 ---
 -837,-546,895
 545,-724,-398
 -105,-144,-62

@@ -1,8 +1,3 @@
-const { test } = require('./8in')
+const { test, input } = require('./8.input');
 
-
-const getLowPoints = str => {
-    const m = str.split('\n').map(l => l.split(''))
-}
-
-console.log(getLowPoints(test))
+console.log(test, input);
