@@ -1,7 +1,7 @@
 const fs = require('fs/promises');
 
 const argmts = process.argv.slice(2);
-const formatBold = str => `\x1b[1m${str}\x1b[0m`;
+const formatBold = (str) => `\x1b[1m${str}\x1b[0m`;
 
 (async function startAdventOfCodeDay(args) {
 	if (!args.length) throw new Error('No Date given');
@@ -15,7 +15,7 @@ const formatBold = str => `\x1b[1m${str}\x1b[0m`;
 	if (day < 1 || day > 25) throw new Error('Bad Day');
 
 	await fs.mkdir('./' + year, { recursive: true });
-	const dayFile = await fs.open(`./${year}/${day}.js`, 'wx+')
+	const solutionFile = await fs.open(`./${year}/${day}.js`, 'wx+')
 		.catch((e) => {
 			if (e.errno === -17) throw new Error('Day already started!');
 			throw e;
@@ -39,7 +39,7 @@ const formatBold = str => `\x1b[1m${str}\x1b[0m`;
 		validatedClassName = 'ClassName';
 	}
 
-	await dayFile.writeFile(
+	await solutionFile.writeFile(
 		[
 			'// =============================  Advent of Code  =============================',
 			`// Solution Day ${day} of ${year}`,
@@ -94,5 +94,10 @@ const formatBold = str => `\x1b[1m${str}\x1b[0m`;
 			'',
 		].join('\n'),
 	);
+
+	await inputFile.close();
+	await testCaseFile.close();
+	await solutionFile.close();
+
 	console.log(`Started Day ${formatBold(day)}, ${formatBold(year)} with ClassName ${formatBold(validatedClassName)}`);
 }(argmts));
