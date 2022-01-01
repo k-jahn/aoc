@@ -1,4 +1,9 @@
-const { input, test } = require('./19.input');
+/* eslint-disable max-classes-per-file, no-continue, no-restricted-syntax */
+
+const {
+	input,
+	// test,
+} = require('./19.input');
 
 // mathutils
 const addVec = (vec1, vec2) => vec1.map((_, i) => vec1[i] + vec2[i]);
@@ -7,21 +12,21 @@ const dotProd = (vec1, vec2) => vec1.reduce((a, _, i) => a + vec1[i] * vec2[i], 
 const matrixProd = (matrix, vec) => matrix.map((e) => dotProd(e, vec));
 
 // hack all day
-const rotMatrixSet = (function () {
+const rotMatrixSet = (function getRotMatrixSet() {
 	const set = [];
 	for (let i = 1; i <= 3; i++) {
 		for (let signI = -1; signI <= 1; signI += 2) {
 			for (let j = 1; j <= 3; j++) {
-				if (j == i) continue;
+				if (j === i) continue;
 				for (let signJ = -1; signJ <= 1; signJ += 2) {
-					const k = [1, 2, 3].find((e) => e != i && e != j);
+					const k = [1, 2, 3].find((e) => e !== i && e !== j);
 					// check permutation for last sign
-					const signK = (i + 1 == j || (i == 3 && j == 1)) ? signI * signJ : -signI * signJ;
+					const signK = (i + 1 === j || (i === 3 && j === 1)) ? signI * signJ : -signI * signJ;
 					// build matrix
 					set.push([
-						new Array(3).fill().map((_, p) => (p == i - 1 ? signI : 0)),
-						new Array(3).fill().map((_, p) => (p == j - 1 ? signJ : 0)),
-						new Array(3).fill().map((_, p) => (p == k - 1 ? signK : 0)),
+						new Array(3).fill().map((_, p) => (p === i - 1 ? signI : 0)),
+						new Array(3).fill().map((_, p) => (p === j - 1 ? signJ : 0)),
+						new Array(3).fill().map((_, p) => (p === k - 1 ? signK : 0)),
 					]);
 				}
 			}
@@ -32,8 +37,7 @@ const rotMatrixSet = (function () {
 
 class Coordinates {
 	constructor(raw) {
-		if (!Array.isArray(raw) || !raw.every((e) => Array.isArray(e) && e.length == 3 && e.every((d) => typeof d === 'number'))) {
-			debugger;
+		if (!Array.isArray(raw) || !raw.every((e) => Array.isArray(e) && e.length === 3 && e.every((d) => typeof d === 'number'))) {
 			throw new TypeError('bad raw data');
 		}
 		this.coo = raw;
@@ -66,7 +70,7 @@ class Coordinates {
 		for (let i = 0; i < coordinates.length; i++) {
 			for (let j = 0; j < this.coo.length; j++) {
 				const [a, b] = [coordinates.get(i), this.get(j)];
-				if (a.every((_, k) => a[k] == b[k])) {
+				if (a.every((_, k) => a[k] === b[k])) {
 					matches++;
 					if (matches >= 12) {
 						return true;
@@ -82,7 +86,7 @@ class Coordinates {
 		const uniqueCoords = [];
 		for (let i = 0; i < coordinates.length; i++) {
 			const a = coordinates.get(i);
-			if (this.coo.every((c) => !c.every((_, k) => c[k] == a[k]))) {
+			if (this.coo.every((c) => !c.every((_, k) => c[k] === a[k]))) {
 				uniqueCoords.push(a);
 			}
 		}
@@ -94,7 +98,7 @@ class Coordinates {
 		for (let i = 0; i < coordinates.length; i++) {
 			for (let j = 0; j < this.coo.length; j++) {
 				const [a, b] = [coordinates.get(i), this.get(j)];
-				if (a.every((_, k) => a[k] == b[k])) {
+				if (a.every((_, k) => a[k] === b[k])) {
 					summedCoords.push(coordinates.get(i));
 				}
 			}
@@ -105,7 +109,7 @@ class Coordinates {
 
 class Scanner {
 	constructor(beacons, i) {
-		const isZero = i == 0;
+		const isZero = i === 0;
 		this.i = i;
 		this.relCoordinates = new Coordinates(beacons);
 		this.absCoordinates = isZero ? this.relCoordinates : null;
@@ -123,7 +127,10 @@ class Scanner {
 					const rotTestCoords = testCoords.rotated(rot);
 					if (refCoords.matches(rotTestCoords)) {
 						this.rot = rot;
-						this.offset = subtractVec(refScanner.absCoordinates.get(i), this.relCoordinates.rotated(rot).get(j));
+						this.offset = subtractVec(
+							refScanner.absCoordinates.get(i),
+							this.relCoordinates.rotated(rot).get(j),
+						);
 						this.absCoordinates = this.relCoordinates.rotated(rot).translated(this.offset);
 						return true;
 					}
@@ -145,7 +152,7 @@ const parser = (str) => {
 	return rawScanners.map((b, i) => new Scanner(b, i));
 };
 
-const parsedTest = parser(test);
+// const parsedTest = parser(test);
 const parsedInput = parser(input);
 
 function getAbsBeacons(scanners) {
@@ -179,7 +186,7 @@ function getAbsBeacons(scanners) {
 // const b = getAbsBeacons(parsedTest)
 const c = getAbsBeacons(parsedInput);
 
-const taxiCab = (a, b) => a.reduce((c, _, i) => c + Math.abs(a[i] - b[i]), 0);
+const taxiCab = (a, b) => a.reduce((acc, _, i) => acc + Math.abs(a[i] - b[i]), 0);
 
 const getDistance = (arr, comparator) => {
 	let max = 0;
