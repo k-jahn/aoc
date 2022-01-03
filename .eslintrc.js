@@ -6,5 +6,6 @@ module.exports = {
 		'no-plusplus': 0,
 		'no-console': 0,
 		'prefer-template': 0,
+		'class-methods-use-this': 0,
 	},
 };

@@ -1,38 +1,69 @@
-const { input, testcase } = require('./3.input');
+// =============================  Advent of Code  =============================
+// Solution Day 3 of 2021
+// See https://adventofcode.com/2021/day/3
 
-const relativeRates = (report) => report
-	.reduce((a, e) => a.map((d, i) => d + (e[i] === '1' ? 1 / report.length : 0)), new Array(report[0].length).fill(0));
+const { testCase } = require('./3.testcase');
+const { input } = require('./3.input');
 
-const rates = (report) => relativeRates(report)
-	.reduce((a, e) => (e > 0.5 ? { g: a.g + '1', e: a.e + '0' } : { g: a.g + '0', e: a.e + '1' }), { g: '', e: '' });
-
-const fromBinary = (r) => ({ g: parseInt(r.g, 2), e: parseInt(r.e, 2) });
-
-console.log(fromBinary(rates(input)));
-
-const lifeSupport = (report, isOxy) => {
-	let current = report;
-	for (let i = 0; i < report[0].length; i++) {
-		const currentRate = relativeRates(current)[i];
-		let filterVal;
-		if (currentRate > 0 && currentRate < 1) {
-			if (currentRate === 0.5) {
-				filterVal = isOxy ? '1' : '0';
-			} else {
-				filterVal = (currentRate > 0.5 && isOxy) || (currentRate < 0.5 && !isOxy) ? '1' : '0';
-			}
-			current = current.filter((e) => e[i] === filterVal);
-		}
+class Diagnostic {
+	constructor(str) {
+		this.diag = str.split('\n')
+			.map((l) => l.split('').map((d) => d === '1'));
+		this.gamma = this.getGamma();
+		this.epsilon = this.getEpsilon();
+		this.o2 = this.getO2();
+		this.co2 = this.getCO2();
 	}
-	return current[0];
-};
 
-console.log(lifeSupport(input, true));
-console.log(lifeSupport(input, false));
+	getGamma() {
+		return this.diag[0]
+			.map((_, i) => this.diag.reduce((a, e) => (e[i] ? a + 1 : a), 0))
+			.map((sum) => sum > this.diag.length / 2);
+	}
 
-console.log(parseInt(lifeSupport(input, true), 2) * parseInt(lifeSupport(input, false), 2));
+	getEpsilon() {
+		return this.gamma.map((e) => !e);
+	}
 
-console.log('testcase');
-console.log(lifeSupport(testcase, true));
-console.log(lifeSupport(testcase, false));
-console.log(parseInt(lifeSupport(testcase, true), 2) * parseInt(lifeSupport(testcase, false), 2));
+	getO2() {
+		let candidates = [...this.diag];
+		const l = candidates[0].length;
+		for (let i = 0; i < l && candidates.length > 1; i++) {
+			const poll = candidates.reduce((a, c) => (c[i] ? a + 1 : a), 0);
+			const nextBit = 2 * poll >= candidates.length;
+			candidates = candidates.filter((c) => c[i] === nextBit);
+		}
+		return candidates[0];
+	}
+
+	getCO2() {
+		let candidates = [...this.diag];
+		const l = candidates[0].length;
+		for (let i = 0; i < l && candidates.length > 1; i++) {
+			const poll = candidates.reduce((a, c) => (c[i] ? a + 1 : a), 0);
+			const nextBit = 2 * poll < candidates.length;
+			candidates = candidates.filter((c) => c[i] === nextBit);
+		}
+		return candidates[0];
+	}
+
+	toNumber(arr) {
+		return parseInt(arr.map((e) => (e ? '1' : '0')).join(''), 2);
+	}
+
+	solvePart1() {
+		return this.toNumber(this.gamma) * this.toNumber(this.epsilon);
+	}
+
+	solvePart2() {
+		return this.toNumber(this.co2) * this.toNumber(this.o2);
+	}
+}
+
+const testDiagnostic = new Diagnostic(testCase);
+console.log(testDiagnostic.solvePart1());
+console.log(testDiagnostic.solvePart2());
+
+const inputDiagnostic = new Diagnostic(input);
+console.log(inputDiagnostic.solvePart1());
+console.log(inputDiagnostic.solvePart2());
