@@ -20,12 +20,12 @@ const formatBold = (str) => `\x1b[1m${str}\x1b[0m`;
 			if (e.errno === -17) throw new Error('Day already started!');
 			throw e;
 		});
-	const inputFile = await fs.open(`./${year}/${day}.input.js`, 'wx+')
+	const inputFile = await fs.open(`./${year}/${day}.input`, 'wx+')
 		.catch((e) => {
 			if (e.errno === -17) throw new Error('Day already started!');
 			throw e;
 		});
-	const testCaseFile = await fs.open(`./${year}/${day}.testcase.js`, 'wx+')
+	const testCaseFile = await fs.open(`./${year}/${day}.testcase`, 'wx+')
 		.catch((e) => {
 			if (e.errno === -17) throw new Error('Day already started!');
 			throw e;
@@ -45,8 +45,10 @@ const formatBold = (str) => `\x1b[1m${str}\x1b[0m`;
 			`// Solution Day ${day} of ${year}`,
 			`// See https://adventofcode.com/${year}/day/${day}`,
 			'',
-			`const { testCase } = require('./${day}.testcase');`,
-			`// const { input } = require('./${day}.input');`,
+			'const { readFileSync } = require(\'fs\');',
+			'',
+			`const testCase = readFileSync('./${day}.testcase').toString().trim();`,
+			`// const input = readFileSync('./${day}.input').toString().trim();`,
 			'',
 			`class ${validatedClassName} {`,
 			'	constructor(str) {',
@@ -73,27 +75,9 @@ const formatBold = (str) => `\x1b[1m${str}\x1b[0m`;
 		].join('\n'),
 	);
 
-	await inputFile.writeFile(
-		[
-			'// =============================  Advent of Code  =============================',
-			`// Input Day ${day} of ${year}`,
-			`// See https://adventofcode.com/${year}/day/${day}/input`,
-			'',
-			'module.exports.input = ``;',
-			'',
-		].join('\n'),
-	);
+	await inputFile.writeFile('');
 
-	await testCaseFile.writeFile(
-		[
-			'// =============================  Advent of Code  =============================',
-			`// TestCase Day ${day} of ${year}`,
-			`// See https://adventofcode.com/${year}/day/${day}`,
-			'',
-			'module.exports.testCase = ``;',
-			'',
-		].join('\n'),
-	);
+	await testCaseFile.writeFile('');
 
 	await inputFile.close();
 	await testCaseFile.close();
