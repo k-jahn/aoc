@@ -8,6 +8,6 @@ module.exports = {
 		'prefer-template': 0,
 		'class-methods-use-this': 0,
 		'max-classes-per-file': 0,
-		'no-unused-vars': ['error', { args: 'after-used', varsIgnorePattern: '^_$' }],
+		'no-unused-vars': ['error', { args: 'after-used', varsIgnorePattern: '^_.*$' }],
 	},
 };

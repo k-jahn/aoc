@@ -9,6 +9,15 @@
 //   #########
 const mask = '#############\n#89.a.b.c.de#\n###1#3#5#7###\n  #0#2#4#6#\n  #########';
 
+// #############
+// #gh.i.j.k.lm#
+// ###3#7#b#f###
+//   #2#6#a#e#
+//   #1#5#9#d#
+//   #0#4#8#c#
+//   #########
+const maskBig = '#############\n#gh.i.j.k.lm#\n###3#7#b#f###\n  #2#6#a#e#\n  #1#5#9#d#\n  #0#4#8#c#\n  #########';
+
 // ABCD
 // 0123
 
@@ -23,23 +32,25 @@ class Amphipod {
 		color,
 		finished,
 		energy,
+		familySize,
 	}) {
 		Object.assign(this, {
 			pos,
 			color,
 			finished,
 			energy,
+			familySize,
 		});
 	}
 
 	getMoveEnergy(target) {
 		const burrow = Math.min(this.pos, target);
-		const burrowSteps = 2 - (burrow % 2);
+		const burrowSteps = this.familySize - (burrow % this.familySize);
 
 		const hall = Math.max(this.pos, target);
-		const entry = Math.floor(burrow / 2) + 10;
+		const entry = Math.floor(burrow / this.familySize) + this.familySize * 4 + 2;
 		const hallSteps = (hall < entry ? 2 * (entry - hall) - 1 : 2 * (hall - entry) + 1)
-			+ (hall === 8 || hall === 14 ? -1 : 0);
+			+ (hall === this.familySize * 4 || hall === this.familySize * 4 + 6 ? -1 : 0);
 
 		const unitCost = 10 ** this.color;
 		return (burrowSteps + hallSteps) * unitCost;
@@ -47,7 +58,7 @@ class Amphipod {
 
 	moveTo(target) {
 		this.energy += this.getMoveEnergy(target);
-		this.finished = target < 8;
+		this.finished = target < this.familySize * 4;
 		this.pos = target;
 		return this;
 	}
@@ -64,7 +75,11 @@ class AmphipodCaveState {
 		const isMemStep = this.steps % 2 === 0;
 		const memKey = isMemStep ? [
 			this.steps,
-			this.pods.map((p) => p.pos).join('-'),
+			this.pods.reduce((a, p) => a + p.energy, 0),
+			this.pods.slice()
+				.sort((a, b) => (a.color !== b.color ? a.color - b.color : a.pos - b.pos))
+				.map((p) => p.pos)
+				.join('-'),
 		].join('_') : null;
 		if (isMemStep) {
 			if (mem[memKey]) return mem[memKey];
@@ -95,24 +110,28 @@ class AmphipodCaveState {
 		return this.pods.map((pod) => {
 			const bPods = this.pods.filter((p) => p !== pod);
 			const moves = [];
+			const famSize = pod.familySize;
 			if (pod.finished) return moves;
-			if (pod.pos < 8) {
+			if (pod.pos < this.pods.length) {
 				// legal moves coming out of burrow
-				if (pod.pos % 2 === 0 && bPods.some((b) => b.pos === pod.pos + 1)) return moves;
-				const entry = Math.floor(pod.pos / 2) + 10;
-				for (let i = entry - 1; i >= 8; i--) {
+				if (
+					bPods.some((b) => Math.floor(b.pos / famSize) === Math.floor(pod.pos / famSize)
+						&& b.pos > pod.pos)
+				) return moves;
+				const entry = Math.floor(pod.pos / famSize) + 2 + this.pods.length;
+				for (let i = entry - 1; i >= this.pods.length; i--) {
 					if (bPods.some((b) => b.pos === i)) break;
 					moves.push(i);
 				}
-				for (let i = entry; i <= 14; i++) {
+				for (let i = entry; i <= this.pods.length + 6; i++) {
 					if (bPods.some((b) => b.pos === i)) break;
 					moves.push(i);
 				}
 			} else {
 				// legal move going into burrow
-				const firstPod = bPods.find((b) => (b.pos === pod.color * 2));
-				if (firstPod && firstPod.color !== pod.color) return moves;
-				const entry = pod.color + 10;
+				const burrowPods = bPods.filter((b) => (Math.floor(b.pos / famSize) === pod.color));
+				if (burrowPods.some((b) => b.color !== pod.color)) return moves;
+				const entry = pod.color + 2 + this.pods.length;
 				if (pod.pos < entry) {
 					for (let i = pod.pos + 1; i < entry; i++) {
 						if (bPods.some((b) => b.pos === i)) return moves;
@@ -122,15 +141,15 @@ class AmphipodCaveState {
 						if (bPods.some((b) => b.pos === i)) return moves;
 					}
 				}
-				moves.push(pod.color * 2 + (firstPod ? 1 : 0));
+				moves.push(pod.color * famSize + burrowPods.length);
 			}
 			return moves;
 		});
 	}
 
 	toString() {
-		let out = mask;
-		'0123456789abcde'.split('')
+		let out = this.pods.length > 8 ? maskBig : mask;
+		'0123456789abcdefghijklm'.split('')
 			.forEach((l, i) => {
 				const a = this.pods.find((p) => p.pos === i);
 				out = out.replace(l, a ? 'ABCD'[a.color] : '.');
@@ -141,21 +160,26 @@ class AmphipodCaveState {
 
 class AmphipodCaveSolver {
 	constructor(str) {
-		this.startingPods = '0123456789abcde'.split('')
-			.map((l) => mask.indexOf(l))
+		this.mask = str.split('\n').length > 5 ? maskBig : mask;
+		this.startingPods = '0123456789abcdefghijklm'
+			.split('')
+			.map((l) => this.mask.indexOf(l))
+			.filter((i) => i !== -1)
 			.map((d) => str[d])
 			.map((l, i) => (l !== '.' ? { color: 'ABCD'.indexOf(l), pos: i } : null))
 			.filter(Boolean)
 			.map((a, _, arr) => new Amphipod({
 				...a,
 				energy: 0,
-				finished: Math.floor(a.pos / 2) === a.color
-					&& (!(a.pos % 2) || arr.every((b) => b.pos !== a.pos - 1 || b.color === a.color)),
+				familySize: arr.length / 4,
+				finished: a.pos < arr.length
+					&& Math.floor(a.pos / (arr.length / 4)) === a.color
+					&& new Array(a.pos % (arr.length / 4)).fill('')
+						.every((__, i) => arr.find((p) => p.pos === a.pos - i - 1 && p.color === a.color)),
 			}));
-		if (this.startingPods.length !== 8
-			|| this.startingPods
-				.reduce((a, p) => a.map((e, i) => (i === p.color ? e + 1 : e)), [0, 0, 0, 0])
-				.some((e) => e !== 2)
+		if (
+			this.startingPods.reduce((a, p) => a.map((e, i) => (i === p.color ? e + 1 : e)), [0, 0, 0, 0])
+				.some((e, i, arr) => arr.indexOf(e) !== 0)
 		) throw new Error('Bad Input!');
 		this.cave = new AmphipodCaveState({ pods: this.startingPods });
 	}
@@ -165,13 +189,14 @@ class AmphipodCaveSolver {
 	}
 
 	solvePart2() {
-		return this;
+		return this.cave.getMoves();
 	}
 }
 
 const testAmphipodCaveSolver = new AmphipodCaveSolver(testCase);
+const beforeTest = Date.now();
 console.log(testAmphipodCaveSolver.solvePart1());
-// console.log(testAmphipodCaveSolver.solvePart2());
+console.log((Date.now() - beforeTest) + ' ms');
 
 const inputAmphipodCaveSolver = new AmphipodCaveSolver(input);
 const before = Date.now();
