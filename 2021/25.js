@@ -1,6 +1,8 @@
-const { test, input } = require('./25.input');
+// =============================  Advent of Code  =============================
+// Solution Day 25 of 2021
+// See https://adventofcode.com/2021/day/25
 
-class Seafloor {
+module.exports = class Seafloor {
 	constructor(str) {
 		this.m = str.split('\n').map((l) => l.split(''));
 		this.steps = 0;
@@ -17,10 +19,6 @@ class Seafloor {
 		this.getCandidates();
 		this.moveSnails('v');
 		this.steps++;
-		console.clear();
-		const squiggly = ['/', '-', '\\', '|'][~~(this.steps / 200) % 4];
-		console.log(squiggly, this.steps);
-		// console.log(this.toString())
 	}
 
 	getCandidates() {
@@ -39,9 +37,9 @@ class Seafloor {
 
 	canSnailMove(x, y) {
 		const snail = this.m[x][y];
-		if (snail == 'v') {
+		if (snail === 'v') {
 			return this.checkFree(x + 1, y);
-		} if (snail == '>') {
+		} if (snail === '>') {
 			return this.checkFree(x, y + 1);
 		}
 		return false;
@@ -50,14 +48,14 @@ class Seafloor {
 	moveSnails(direction) {
 		this.candidates[direction].forEach(([x, y]) => {
 			this.write(x, y, '.');
-			const [tx, ty] = this.wrap(direction == 'v' ? x + 1 : x, direction == '>' ? y + 1 : y);
+			const [tx, ty] = this.wrap(direction === 'v' ? x + 1 : x, direction === '>' ? y + 1 : y);
 			this.write(tx, ty, direction);
 		});
 	}
 
 	checkFree(x, y) {
 		const [wx, wy] = this.wrap(x, y);
-		return this.m[wx][wy] == '.';
+		return this.m[wx][wy] === '.';
 	}
 
 	wrap(x, y) {
@@ -75,10 +73,10 @@ class Seafloor {
 	toString() {
 		return '\n' + this.m.map((l) => l.join('')).join('\n') + '\n';
 	}
-}
 
-const seafloor = new Seafloor(input);
+	solvePart1() {
+		while (!this.locked) this.step();
 
-while (!seafloor.locked) seafloor.step();
-
-console.log(seafloor.steps + 1);
+		return this.steps + 1;
+	}
+};
