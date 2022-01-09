@@ -5,7 +5,7 @@
 
 const { readFileSync } = require('fs');
 
-const ${validatedClassName} = require('./${day}');
+const ${className} = require('./${day}');
 
 const formatBold = (str) => `\x1b[1m${str}\x1b[0m`;
 
@@ -16,9 +16,9 @@ console.log(formatBold('Testcase'));
 
 const testCaseStart = Date.now();
 
-const test${validatedClassName} = new ${validatedClassName}(testCase);
-console.log(test${validatedClassName}.solvePart1());
-// console.log(test${validatedClassName}.solvePart2());
+const test${className} = new ${className}(testCase);
+console.log(test${className}.solvePart1());
+// console.log(test${className}.solvePart2());
 
 console.log((formatBold(Date.now() - testCaseStart) + 'ms'));
 
@@ -26,8 +26,8 @@ console.log(formatBold('\nTask'));
 
 const taskStart = Date.now();
 
-// const input${validatedClassName} = new ${validatedClassName}(input);
-// console.log(input${validatedClassName}.solvePart1());
-// console.log(input${validatedClassName}.solvePart2());
+// const input${className} = new ${className}(input);
+// console.log(input${className}.solvePart1());
+// console.log(input${className}.solvePart2());
 
 console.log((formatBold(Date.now() - taskStart) + 'ms'));

@@ -2,3 +2,4 @@ node_modules/
 *inspect*
 *.input*
 **/visualization/**
+session
