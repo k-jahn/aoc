@@ -1,0 +1,17 @@
+// =============================  Advent of Code  =============================
+// Solution Day ${day} of ${year}
+// See https://adventofcode.com/${year}/day/${day}
+
+module.exports = class ${validatedClassName} {
+	constructor(str) {
+		this.str = str;
+	}
+
+	solvePart1() {
+		return this;
+	}
+
+	solvePart2() {
+		return this;
+	}
+};

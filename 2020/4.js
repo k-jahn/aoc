@@ -2,12 +2,7 @@
 // Solution Day 4 of 2020
 // See https://adventofcode.com/2020/day/4
 
-const { readFileSync } = require('fs');
-
-const testCase = readFileSync('./4.testcase').toString().trim();
-const input = readFileSync('./4.input').toString().trim();
-
-class PassportChecker {
+module.exports = class PassportChecker {
 	constructor(str) {
 		this.psp = str.split('\n\n')
 			.map((l) => l.split(/[\n ]/)
@@ -45,12 +40,4 @@ class PassportChecker {
 				.every((prop) => p[prop] && this.req[prop](p[prop])))
 			.length;
 	}
-}
-
-const testPassportChecker = new PassportChecker(testCase);
-console.log(testPassportChecker.solvePart1());
-console.log(testPassportChecker.solvePart2());
-
-const inputPassportChecker = new PassportChecker(input);
-console.log(inputPassportChecker.solvePart1());
-console.log(inputPassportChecker.solvePart2());
+};

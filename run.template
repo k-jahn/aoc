@@ -1,0 +1,33 @@
+// =============================  Advent of Code  =============================
+// Runner Day ${day} of ${year}
+// See https://adventofcode.com/${year}/day/${day}
+/* eslint-disable no-unused-vars */
+
+const { readFileSync } = require('fs');
+
+const ${validatedClassName} = require('./${day}');
+
+const formatBold = (str) => `\x1b[1m${str}\x1b[0m`;
+
+const testCase = readFileSync('./${day}.testcase').toString().trim();
+const input = readFileSync('./${day}.input').toString().trim();
+
+console.log(formatBold('Testcase'));
+
+const testCaseStart = Date.now();
+
+const test${validatedClassName} = new ${validatedClassName}(testCase);
+console.log(test${validatedClassName}.solvePart1());
+// console.log(test${validatedClassName}.solvePart2());
+
+console.log((formatBold(Date.now() - testCaseStart) + 'ms'));
+
+console.log(formatBold('\nTask'));
+
+const taskStart = Date.now();
+
+// const input${validatedClassName} = new ${validatedClassName}(input);
+// console.log(input${validatedClassName}.solvePart1());
+// console.log(input${validatedClassName}.solvePart2());
+
+console.log((formatBold(Date.now() - taskStart) + 'ms'));

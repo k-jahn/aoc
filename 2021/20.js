@@ -1,11 +1,7 @@
 // =============================  Advent of Code  =============================
 // Solution Day 20 of 2021
 // See https://adventofcode.com/2021/day/20
-
-const { testCase } = require('./20.testcase');
-const { input } = require('./20.input');
-
-class TrenchImage {
+module.exports = class TrenchImage {
 	constructor(str) {
 		const [enhancementStr, imgStr] = str.split('\n\n');
 		this.enhancementAlg = enhancementStr.split('').map((e) => e === '#');
@@ -73,19 +69,4 @@ class TrenchImage {
 	toString() {
 		return this.img.map((l) => l.map((p) => (p ? '#' : '.')).join('')).join('\n');
 	}
-}
-
-const testTrenchImage = new TrenchImage(testCase);
-// console.log(
-// 	testTrenchImage.toString(),
-// 	'\n\n',
-// 	testTrenchImage.enhance().toString(),
-// 	'\n\n',
-// 	testTrenchImage.enhance().toString(),
-// );
-console.log(testTrenchImage.solvePart2());
-
-const inputTrenchImage = new TrenchImage(input);
-// console.log(inputTrenchImage.enhance().enhance().toString());
-// console.log(inputTrenchImage.solvePart1());
-console.log(inputTrenchImage.solvePart2());
+};
