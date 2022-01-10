@@ -55,7 +55,10 @@ const formatBold = (str) => `\x1b[1m${str}\x1b[0m`;
 	const className = classNameStr.split(' ')
 		.map((w) => w.slice(0, 1).toUpperCase() + w.slice(1))
 		.join('');
-	const testCaseStr = dom.window.document.querySelector('pre').textContent;
+	const testCaseStr = (dom.window.document.querySelector('pre')
+		&& dom.window.document.querySelector('pre').textContent) || '';
+
+	console.log(testCaseStr ? 'Found possible testCase' : 'Did not find testCase');
 
 	await solutionFile.writeFile(
 		solutionTemplate.replace(/\$\{day\}/g, day)
