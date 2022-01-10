@@ -20,18 +20,18 @@ console.log(formatBold('\nVisualizing'));
 
 const taskStart = Date.now();
 
-console.log(formatGreen('Initializing Seafloor'), (formatBold(Date.now() - taskStart) + 'ms'));
+console.log('Initializing Seafloor', (formatBold(Date.now() - taskStart) + 'ms'));
 const inputSeafloor = new Seafloor(input);
 const width = inputSeafloor.m[0].length;
 
-console.log(formatGreen('Removing old data'), (formatBold(Date.now() - taskStart) + 'ms'));
+console.log('Removing old data', (formatBold(Date.now() - taskStart) + 'ms'));
 const dir = './visualization/25/';
 rmSync(dir, { recursive: true });
 mkdirSync(dir, { recursive: true });
 
 let locked = false;
 const promises = [];
-console.log(formatGreen('Rendering Frames'), (formatBold(Date.now() - taskStart) + 'ms'));
+console.log('Rendering Frames', (formatBold(Date.now() - taskStart) + 'ms'));
 while (!locked) {
 	locked = inputSeafloor.locked;
 	const frameStr = inputSeafloor.toString();
@@ -49,15 +49,15 @@ while (!locked) {
 }
 Promise.all(promises)
 	.then(() => {
-		console.log(formatGreen('Removing ANSI'), (formatBold(Date.now() - taskStart) + 'ms'));
+		console.log('Removing ANSI', (formatBold(Date.now() - taskStart) + 'ms'));
 		return exec(`rm ${dir}*.ansi`);
 	})
 	.then(() => {
-		console.log(formatGreen('Building MP4'), (formatBold(Date.now() - taskStart) + 'ms'));
+		console.log('Building MPG', (formatBold(Date.now() - taskStart) + 'ms'));
 		return exec('ffmpeg -y -r 9 -f image2 -i %03d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p output.mp4', { cwd: dir });
 	})
 	.then(() => {
-		console.log(formatGreen('Removing PNG'), (formatBold(Date.now() - taskStart) + 'ms'));
+		console.log('Removing PNG', (formatBold(Date.now() - taskStart) + 'ms'));
 		return exec(`rm ${dir}*.png`);
 	})
 	.then((r) => console.log('Done', (formatBold(Date.now() - taskStart) + 'ms')));
