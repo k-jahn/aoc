@@ -28,6 +28,37 @@ module.exports = class DockingData {
 		return parseInt(masked, 2);
 	}
 
+	applyMask2(number, mask) {
+		const le = number.toString(2).split('').reverse();
+		const reversedMask = mask.slice().reverse();
+		const masked = reversedMask.map((e, i) => (e === '0' ? (le[i] || e) : e)).reverse().join('');
+		return masked;
+	}
+
+	addToMem(key, val) {
+		this.mem2 = this.mem2.map((entry) => {
+			const oKey = this.getOverlapKey(key, entry.key);
+			// if (oKey === entry.key) return [];
+			if (oKey) {
+				return [entry].concat({ key: oKey, val: -entry.val });
+			}
+			return [entry];
+		}).reduce((a, b) => a.concat(b), []);
+		this.mem2.push({ key, val });
+	}
+
+	getOverlapKey(key1, key2) {
+		let oKey = 'r';
+		for (let i = 1; i < key1.length; i++) {
+			const [a, b] = [key1[i], key2[i]];
+			if (a === b) oKey += a;
+			else if (a === 'X') oKey += b;
+			else if (b === 'X') oKey += a;
+			else return null;
+		}
+		return oKey;
+	}
+
 	solvePart1() {
 		this.mem = {};
 		let currentMask;
@@ -40,6 +71,15 @@ module.exports = class DockingData {
 	}
 
 	solvePart2() {
-		return this;
+		this.mem2 = [];
+		let currentMask;
+		this.instructions.forEach((inst) => {
+			if (inst.type === 'mask') currentMask = inst.mask;
+			if (inst.type === 'mem') this.addToMem('r' + this.applyMask2(inst.reg, currentMask), inst.val);
+		});
+		return this.mem2.map(({ val, key }) => {
+			const pow = key.split('').filter((l) => l === 'X').length;
+			return val * (2 ** pow);
+		}).reduce((a, b) => a + b);
 	}
 };

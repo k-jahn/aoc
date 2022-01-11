@@ -18,7 +18,7 @@ const testCaseStart = Date.now();
 
 const testDockingData = new DockingData(testCase);
 console.log(testDockingData.solvePart1());
-// console.log(testDockingData.solvePart2());
+console.log(testDockingData.solvePart2());
 
 console.log((formatBold(Date.now() - testCaseStart) + 'ms'));
 
@@ -28,6 +28,6 @@ const taskStart = Date.now();
 
 const inputDockingData = new DockingData(input);
 console.log(inputDockingData.solvePart1());
-// console.log(inputDockingData.solvePart2());
+console.log(inputDockingData.solvePart2());
 
 console.log((formatBold(Date.now() - taskStart) + 'ms'));
