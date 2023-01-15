@@ -1,6 +1,10 @@
 // =============================  Advent of Code  =============================
 // Runner Day 25 of 2021
 // See https://adventofcode.com/${year}/day/25
+//
+// to install external dependencies
+// sudo apt install ffmpeg ansilove
+//
 /* eslint-disable no-unused-vars */
 
 const { readFileSync, mkdirSync, rmSync } = require('fs');
