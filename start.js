@@ -76,6 +76,7 @@ const formatBold = (str) => `\x1b[1m${str}\x1b[0m`;
 
 	await testCaseFile.close();
 	await solutionFile.close();
+	await runFile.close();
 
 	console.log(`Generated Boilerplate for Day ${formatBold(day)}, ${formatBold(year)} with ClassName ${formatBold(className)}`);
 	const getInputProc = exec(`npm run getinput ${day} ${year}`);
