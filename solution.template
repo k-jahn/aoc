@@ -3,6 +3,9 @@
 // See https://adventofcode.com/${year}/day/${day}
 
 module.exports = class ${className} {
+	/**
+	 * @param {string} str
+	 */
 	constructor(str) {
 		this.str = str;
 	}
