@@ -1,6 +1,6 @@
 const { exec } = require('child_process');
 const fs = require('fs');
-const fetch = require('cross-fetch');
+const fetch = require('node-fetch-commonjs');
 const { JSDOM } = require('jsdom');
 
 const parseParams = require('./parseparams');
@@ -50,7 +50,7 @@ const formatBold = (str) => `\x1b[1m${str}\x1b[0m`;
 
 	console.log(`Received ${response.headers.get('content-length')} bytes [${formatBold(Date.now() - now)}ms]`);
 
-	const [_, classNameStr] = dom.window.document.querySelector('h2').textContent
+	const [_, classNameStr] = dom.window.document.querySelector('h2').textContent.replace()
 		.match(new RegExp(`--- Day ${day}: (.*) ---`));
 	const className = classNameStr.split(' ')
 		.map((w) => w.slice(0, 1).toUpperCase() + w.slice(1))
