@@ -18,7 +18,7 @@ const testCaseStart = Date.now();
 
 const testHillClimbingAlgorithm = new HillClimbingAlgorithm(testCase);
 console.log(testHillClimbingAlgorithm.solvePart1());
-// console.log(testHillClimbingAlgorithm.solvePart2());
+console.log(testHillClimbingAlgorithm.solvePart2());
 
 console.log((formatBold(Date.now() - testCaseStart) + 'ms'));
 
@@ -28,6 +28,6 @@ const taskStart = Date.now();
 
 const inputHillClimbingAlgorithm = new HillClimbingAlgorithm(input);
 console.log(inputHillClimbingAlgorithm.solvePart1());
-// console.log(inputHillClimbingAlgorithm.solvePart2());
+console.log(inputHillClimbingAlgorithm.solvePart2());
 
 console.log((formatBold(Date.now() - taskStart) + 'ms'));

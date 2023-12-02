@@ -17,6 +17,8 @@ class Node {
 		this.start = this.value === 'S';
 		this.end = this.value === 'E';
 		this.height = val.replace('S', 'a').replace('E', 'z').charCodeAt(0) - 97;
+		// part II
+		this.reverseConnections = [];
 	}
 
 	/**
@@ -25,8 +27,8 @@ class Node {
 	 */
 	link(node) {
 		// check climbability
-		if (node.height - this.height > 1) return;
-		this.connections.push(node);
+		if (node.height - this.height <= 1) this.connections.push(node);
+		if (node.height - this.height >= -1) this.reverseConnections.push(node);
 	}
 }
 
@@ -79,6 +81,23 @@ module.exports = class HillClimbingAlgorithm {
 	}
 
 	solvePart2() {
-		return this;
+		const startNode = this.landscape.find((node) => node.end);
+		startNode.path = [];
+		let current = [startNode];
+		const visited = [startNode];
+		for (let step = 1; current.length; step++) {
+			const next = new Set();
+			for (const node of current) {
+				for (const connection of node.reverseConnections) {
+					if (connection.height === 0) return step;
+					if (visited.some((visitedNode) => visitedNode === connection)) continue;
+					connection.path = node.path.concat([node]);
+					visited.push(connection);
+					next.add(connection);
+				}
+			}
+			current = Array.from(next);
+		}
+		return NaN;
 	}
 };
