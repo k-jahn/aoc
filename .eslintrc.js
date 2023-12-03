@@ -1,5 +1,8 @@
 module.exports = {
 	extends: ['airbnb-base'],
+	parserOptions: {
+		ecmaVersion: 2020,
+	},
 	rules: {
 		indent: ['error', 'tab', { SwitchCase: 1 }],
 		'no-tabs': 0,
