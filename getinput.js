@@ -4,6 +4,7 @@ const fetch = require('node-fetch-commonjs');
 const fs = require('fs');
 
 const parseParams = require('./parseparams');
+const config = require('./config.json');
 
 const session = fs.readFileSync('./session').toString();
 const formatBold = (str) => `\x1b[1m${str}\x1b[0m`;
@@ -22,7 +23,7 @@ const formatBold = (str) => `\x1b[1m${str}\x1b[0m`;
 		{
 			headers: {
 				Cookie: `session=${session}`,
-				'User-Agent': 'diy downloader https://github.com/k-jahn/aoc by konrad.jahn.84@gmail.com',
+				...config.requestHeaders,
 			},
 		},
 	);
