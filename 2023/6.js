@@ -41,4 +41,19 @@ module.exports = class WaitForIt {
 		}
 		return count;
 	}
+
+	// analytical
+	solvePart2Analytical() {
+		return this.solveAnalytical(this.race.time, this.race.distance);
+	}
+
+	// analytical
+	solveAnalytical(t, d) {
+		const upper = t / 2 + (t ** 2 / 4 - d) ** 0.5;
+		const lower = t / 2 - (t ** 2 / 4 - d) ** 0.5;
+		// handle edges - this is why analytical is hard
+		const u = Math.floor(upper) === upper ? upper - 1 : Math.floor(upper);
+		const l = Math.floor(lower) === lower ? lower + 1 : Math.ceil(lower);
+		return u - l + 1;
+	}
 };

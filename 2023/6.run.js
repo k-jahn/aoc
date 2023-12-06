@@ -17,8 +17,9 @@ console.log(formatBold('Testcase'));
 const testCaseStart = Date.now();
 
 const testWaitForIt = new WaitForIt(testCase);
-console.log(testWaitForIt.solvePart1());
-console.log(testWaitForIt.solvePart2());
+// console.log(testWaitForIt.solvePart1());
+// console.log(testWaitForIt.solvePart2());
+console.log(testWaitForIt.solvePart2Analytical());
 
 console.log((formatBold(Date.now() - testCaseStart) + 'ms'));
 
@@ -27,7 +28,8 @@ console.log(formatBold('\nTask'));
 const taskStart = Date.now();
 
 const inputWaitForIt = new WaitForIt(input);
-console.log(inputWaitForIt.solvePart1());
-console.log(inputWaitForIt.solvePart2());
+// console.log(inputWaitForIt.solvePart1());
+// console.log(inputWaitForIt.solvePart2());
+console.log(inputWaitForIt.solvePart2Analytical());
 
 console.log((formatBold(Date.now() - taskStart) + 'ms'));
