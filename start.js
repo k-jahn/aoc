@@ -5,6 +5,8 @@ const { JSDOM } = require('jsdom');
 
 const parseParams = require('./parseparams');
 
+const config = require('./config.json');
+
 const session = fs.readFileSync('./session').toString();
 const solutionTemplate = fs.readFileSync('./solution.template').toString();
 const runTemplate = fs.readFileSync('./run.template').toString();
@@ -42,6 +44,7 @@ const formatBold = (str) => `\x1b[1m${str}\x1b[0m`;
 		{
 			headers: {
 				Cookie: `session=${session}`,
+				...config.requestHeaders,
 			},
 		},
 	);
