@@ -18,7 +18,7 @@ module.exports = class CathodeRayTube {
 	solvePart1() {
 		let reg = 1;
 		let t = 1;
-		const run = this.instructions.map(({instruction, value}) => {
+		const run = this.instructions.map(({ instruction, value }) => {
 			t += instruction === 'noop' ? 1 : 2;
 			if (instruction === 'addx') reg += value || 0;
 			return { t, r: reg };
@@ -26,7 +26,7 @@ module.exports = class CathodeRayTube {
 		const reversed = [...run].reverse();
 		return [20, 60, 100, 140, 180, 220]
 			.map((cycle) => {
-				const state = reversed.find((s) => s.t <= cycle)
+				const state = reversed.find((s) => s.t <= cycle);
 				return state.r * cycle;
 			})
 			.reduce((a, b) => a + b);
@@ -35,7 +35,7 @@ module.exports = class CathodeRayTube {
 	solvePart2() {
 		let reg = 1;
 		let t = 1;
-		const run = this.instructions.map(({instruction, value}) => {
+		const run = this.instructions.map(({ instruction, value }) => {
 			t += instruction === 'noop' ? 1 : 2;
 			if (instruction === 'addx') reg += value || 0;
 			return { t, r: reg };
