@@ -57,7 +57,8 @@ const formatBold = (str) => `\x1b[1m${str}\x1b[0m`;
 		.match(new RegExp(`--- Day ${day}: (.*) ---`));
 	const className = classNameStr.split(' ')
 		.map((w) => w.slice(0, 1).toUpperCase() + w.slice(1))
-		.join('');
+		.join('')
+		.replace(/[^a-zA-Z0-9]/g, '');
 	const testCaseStr = (dom.window.document.querySelector('pre')
 		&& dom.window.document.querySelector('pre').textContent) || '';
 
