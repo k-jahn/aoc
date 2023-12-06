@@ -17,8 +17,9 @@ console.log(formatBold('Testcase'));
 const testCaseStart = Date.now();
 
 const testIfYouGiveASeedAFertilizer = new IfYouGiveASeedAFertilizer(testCase);
-// console.log(testIfYouGiveASeedAFertilizer.solvePart1());
-console.log(testIfYouGiveASeedAFertilizer.solvePart2());
+console.log(testIfYouGiveASeedAFertilizer.solvePart1());
+console.log(testIfYouGiveASeedAFertilizer.solvePart2Brute());
+// console.log(testIfYouGiveASeedAFertilizer.solvePart2());
 
 console.log((formatBold(Date.now() - testCaseStart) + 'ms'));
 
@@ -27,7 +28,8 @@ console.log(formatBold('\nTask'));
 const taskStart = Date.now();
 
 const inputIfYouGiveASeedAFertilizer = new IfYouGiveASeedAFertilizer(input);
-// console.log(inputIfYouGiveASeedAFertilizer.solvePart1());
+console.log(inputIfYouGiveASeedAFertilizer.solvePart1());
+console.log(inputIfYouGiveASeedAFertilizer.solvePart2Brute());
 // console.log(inputIfYouGiveASeedAFertilizer.solvePart2());
 
 console.log((formatBold(Date.now() - taskStart) + 'ms'));
