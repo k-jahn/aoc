@@ -33,6 +33,7 @@ module.exports = class WaitForIt {
 			.reduce((a, b) => a * b);
 	}
 
+	// brute force
 	solvePart2() {
 		let count = 0;
 		for (let i = 1; i < this.race.time; i++) {
