@@ -36,8 +36,8 @@ module.exports = async function parseParams(
 			: new Date().getFullYear();
 		let year = yearArg < 100 ? yearArg + 2000 : yearArg;
 		if (getYear) {
-			while (!year || year < 2016 || year > lastAdventYear) {
-				const yearPrompt = parseInt(await prompt(`Year [2016-${lastAdventYear}]: `), 10); // eslint-disable-line no-await-in-loop
+			while (!year || year < 2015 || year > lastAdventYear) {
+				const yearPrompt = parseInt(await prompt(`Year [2015-${lastAdventYear}]: `), 10); // eslint-disable-line no-await-in-loop
 				year = yearPrompt < 100 ? yearPrompt + 2000 : yearPrompt;
 			}
 		}
