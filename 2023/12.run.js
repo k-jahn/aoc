@@ -18,8 +18,9 @@ const testCaseStart = Date.now();
 
 const testHotSprings = new HotSprings(testCase);
 // console.log(testHotSprings.solvePart1());
-console.log(testHotSprings.solvePart1Efficient());
+// console.log(testHotSprings.solvePart1Efficient());
 console.log(testHotSprings.solvePart2());
+// console.log(testHotSprings.solvePart2Control());
 
 console.log((formatBold(Date.now() - testCaseStart) + 'ms'));
 
@@ -29,7 +30,9 @@ const taskStart = Date.now();
 
 const inputHotSprings = new HotSprings(input);
 // console.log(inputHotSprings.solvePart1());
-console.log(inputHotSprings.solvePart1Efficient());
+// console.log(inputHotSprings.solvePart1Efficient());
+// console.log(inputHotSprings.solvePart1Efficient());
+// console.log(inputHotSprings.solvePart1Efficient());
 console.log(inputHotSprings.solvePart2());
 
 console.log((formatBold(Date.now() - taskStart) + 'ms'));
