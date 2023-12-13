@@ -18,7 +18,7 @@ const testCaseStart = Date.now();
 
 const testPointOfIncidence = new PointOfIncidence(testCase);
 console.log(testPointOfIncidence.solvePart1());
-// console.log(testPointOfIncidence.solvePart2());
+console.log(testPointOfIncidence.solvePart2());
 
 console.log((formatBold(Date.now() - testCaseStart) + 'ms'));
 
@@ -28,6 +28,6 @@ const taskStart = Date.now();
 
 const inputPointOfIncidence = new PointOfIncidence(input);
 console.log(inputPointOfIncidence.solvePart1());
-// console.log(inputPointOfIncidence.solvePart2());
+console.log(inputPointOfIncidence.solvePart2());
 
 console.log((formatBold(Date.now() - taskStart) + 'ms'));
