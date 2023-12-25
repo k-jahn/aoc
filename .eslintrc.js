@@ -13,5 +13,6 @@ module.exports = {
 		'max-classes-per-file': 0,
 		'no-unused-vars': ['error', { args: 'after-used', varsIgnorePattern: '^_.*$' }],
 		'no-lonely-if': 0,
+		'object-curly-newline': 0,
 	},
 };
